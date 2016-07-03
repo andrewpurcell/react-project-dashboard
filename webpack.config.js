@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: ['whatwg-fetch', './src/index.jsx'],
   output: {
     path: 'build',
     filename: 'bundle.js'
