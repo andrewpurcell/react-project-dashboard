@@ -1,9 +1,11 @@
 import React from 'react'
 import Header from './Header'
 import FilterPanel from './FilterPanel'
+import FilteredContent from './FilteredContent'
 import ContentPanel from './ContentPanel'
+import { connect } from 'react-redux'
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { filter: null, currentUser: null }
@@ -59,9 +61,17 @@ export default class App extends React.Component {
           clearFilter={this.clearFilter.bind(this)}
           currentFilter={this.state.filter}
           allFilters={this.filters()}/>
-        <ContentPanel items={this.applyTypeFilter()} />
+
+        <FilteredContent currentFilter={this.state.filter} />
 
       </div>
     );
   }
 }
+
+const mapStateToProps = (store) => {
+  return {
+    items: store.projects
+  }
+}
+export default connect(mapStateToProps)(App)
