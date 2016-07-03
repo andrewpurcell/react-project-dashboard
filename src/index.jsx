@@ -4,9 +4,12 @@ import App from './components/App.jsx';
 import PROJECTS from './projects';
 
 import appReducer from './reducers/appReducer'
+import configureStore from './store/configureStore'
 
-import { createStore } from 'redux'
+import { createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
+// I'm ignoring warnings about not using this in production.
+import DevTools from './containers/DevTools'
 
 const initialStoreState = {
   projects: PROJECTS,
@@ -14,10 +17,13 @@ const initialStoreState = {
   currentFilter: null,
 }
 
-const store = createStore(appReducer, initialStoreState);
+const store = configureStore(initialStoreState);
 
 render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('app'));
