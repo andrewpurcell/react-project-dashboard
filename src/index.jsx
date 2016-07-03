@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App.jsx';
+import App from './components/App.jsx';
+import PROJECTS from './projects';
 
-render(<App />, document.getElementById('app'));
+render(<App items={PROJECTS} />, document.getElementById('app'));

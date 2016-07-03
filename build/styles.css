@@ -1,0 +1,16 @@
+h1 {
+  color: pink;
+}
+
+.filter-panel {
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.project td {
+  text-align: center;
+}
+
+tr.project {
+  border: 1px solid gray;
+}
