@@ -6,7 +6,15 @@ import ContentPanel from './ContentPanel'
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {filter: null}
+    this.state = { filter: null, currentUser: null }
+  }
+
+  setCurrentUser(newUser) {
+    this.setState({currentUser: newUser});
+  }
+
+  unsetCurrentUser() {
+    this.setCurrentUser(null)
   }
 
   setTypeFilter(type) {
@@ -41,7 +49,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Header title="The Header" />
+        <Header
+          setCurrentUser={this.setCurrentUser.bind(this)}
+          unsetCurrentUser={this.unsetCurrentUser.bind(this)}
+          currentUser={this.state.currentUser} />
+
         <FilterPanel
           applyFilter={this.setTypeFilter.bind(this)}
           clearFilter={this.clearFilter.bind(this)}
