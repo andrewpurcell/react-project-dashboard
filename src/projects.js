@@ -48,7 +48,7 @@ const PROJECTS = [
   {
     id: sequence++,
     name: 'Mow the lawn',
-    type: 'painting',
+    type: 'yardwork',
     supervisor: 'Scott',
     worker: 'Jimbo',
     tasks: [
@@ -59,7 +59,7 @@ const PROJECTS = [
   {
     id: sequence++,
     name: 'Vacuum the carpet',
-    type: 'painting',
+    type: 'vacuuming',
     supervisor: 'Scott',
     worker: 'Jimbo',
     tasks: [

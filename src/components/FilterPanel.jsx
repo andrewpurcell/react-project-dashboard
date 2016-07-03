@@ -2,31 +2,36 @@ import React from 'react'
 
 export default class FilterPanel extends React.Component {
   render() {
-    const { currentFilter } = this.props;
-    var buttonText, buttonAction, filterStatus;
+    const { currentFilter, allFilters } = this.props;
 
-    if (currentFilter != null) {
-      filterStatus = `Active filter: ${currentFilter}`;
-      buttonText = "Clear active filter";
-      buttonAction = this.props.clearFilter;
-    } else {
-      buttonText = "Show only painting projects"
-      buttonAction = this.applyFilter.bind(this, 'painting');
-    }
-
+    const filterButtons = allFilters.map((filter) => {
+      if (currentFilter === filter) {
+        return {
+          text: `Clear active filter ${filter}`,
+          action: this.props.clearFilter
+        };
+      } else {
+        return {
+          text: `Show only ${filter} projects`,
+          action: this.applyFilter.bind(this, filter)
+        };
+      }
+    });
 
     return (
       <div className='filter-panel'>
-        {filterStatus}
-        <button
-          onClick={buttonAction}>
-          {buttonText}
-        </button>
+        {filterButtons.map(
+          (buttonAttributes) =>
+            <button onClick={buttonAttributes.action}>
+              {buttonAttributes.text}
+            </button>
+          )
+        }
       </div>
     );
   }
 
   applyFilter(type) {
-    this.props.applyTypeFilter(type);
+    this.props.applyFilter(type);
   }
 }
