@@ -1,3 +1,11 @@
 export default (state, action) => {
-  return state;
+  console.log("Applying", action)
+  switch(action.type) {
+    case 'APPLY_FILTER':
+      return Object.assign({}, state, { currentFilter: action.value })
+    case 'CLEAR_FILTER':
+      return Object.assign({}, state, { currentFilter: null })
+    default:
+      return state;
+  }
 }

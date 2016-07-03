@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import filterActions from '../actions/filterActions'
 
-export default class FilterPanel extends React.Component {
+class FilterPanel extends React.Component {
   render() {
     const { currentFilter, allFilters } = this.props;
 
@@ -13,7 +15,7 @@ export default class FilterPanel extends React.Component {
       } else {
         return {
           text: `Show only ${filter} projects`,
-          action: this.applyFilter.bind(this, filter)
+          action: this.props.applyFilter.bind(this, 'type', filter)
         };
       }
     });
@@ -30,8 +32,23 @@ export default class FilterPanel extends React.Component {
       </div>
     );
   }
+}
 
-  applyFilter(type) {
-    this.props.applyFilter(type);
+const mapStateToProps = (store) => {
+  return {
+    currentFilter: store.currentFilter
   }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    applyFilter: (filteredAttribute, filteredValue) => {
+      dispatch(filterActions.applyFilter(filteredAttribute, filteredValue))
+    },
+    clearFilter: (filteredAttribute, filteredValue) => {
+      dispatch(filterActions.clearFilter(filteredAttribute, filteredValue))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)

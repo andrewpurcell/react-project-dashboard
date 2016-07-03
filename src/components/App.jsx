@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { filter: null, currentUser: null }
+    this.state = { currentUser: null }
   }
 
   setCurrentUser(newUser) {
@@ -17,27 +17,6 @@ class App extends React.Component {
 
   unsetCurrentUser() {
     this.setCurrentUser(null)
-  }
-
-  setTypeFilter(type) {
-    console.log("Applied", type);
-    this.setState({ filter: type });
-  };
-
-  applyTypeFilter() {
-    const { filter } = this.state;
-
-    if (filter == null) {
-      return this.props.items;
-    }
-
-    return this.props.items.filter(
-      (item) => item.type === this.state.filter
-    );
-  }
-
-  clearFilter() {
-    this.setState({filter: null})
   }
 
   filters() {
@@ -57,12 +36,10 @@ class App extends React.Component {
           currentUser={this.state.currentUser} />
 
         <FilterPanel
-          applyFilter={this.setTypeFilter.bind(this)}
-          clearFilter={this.clearFilter.bind(this)}
-          currentFilter={this.state.filter}
+          currentFilter={this.props.currentFilter}
           allFilters={this.filters()}/>
 
-        <FilteredContent currentFilter={this.state.filter} />
+        <FilteredContent currentFilter={this.props.currentFilter} />
 
       </div>
     );
@@ -71,7 +48,8 @@ class App extends React.Component {
 
 const mapStateToProps = (store) => {
   return {
-    items: store.projects
+    items: store.projects,
+    currentFilter: store.currentFilter
   }
 }
 export default connect(mapStateToProps)(App)
