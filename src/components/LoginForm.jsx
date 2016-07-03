@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import userActions from '../actions/userActions'
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {};
@@ -29,3 +31,13 @@ export default class LoginForm extends React.Component {
     this.setState({ [attribute]: event.target.value})
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSetName: (newName) => {
+      dispatch(userActions.sign_in(newName))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm)

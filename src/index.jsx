@@ -8,7 +8,13 @@ import appReducer from './reducers/appReducer'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-const store = createStore(appReducer, { projects: PROJECTS });
+const initialStoreState = {
+  projects: PROJECTS,
+  user: null,
+  currentFilter: null,
+}
+
+const store = createStore(appReducer, initialStoreState);
 
 render(
   <Provider store={store}>

@@ -30,10 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header
-          setCurrentUser={this.setCurrentUser.bind(this)}
-          unsetCurrentUser={this.unsetCurrentUser.bind(this)}
-          currentUser={this.state.currentUser} />
+        <Header />
 
         <FilterPanel
           currentFilter={this.props.currentFilter}
