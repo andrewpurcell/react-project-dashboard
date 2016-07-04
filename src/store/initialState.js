@@ -1,7 +1,5 @@
-import PROJECTS from './projects';
-
 export default {
-  projects: PROJECTS,
+  projects: [],
   user: null,
   currentFilter: null,
 }
